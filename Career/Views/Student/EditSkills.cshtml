@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Career.Data.Skill>
+
+@{
+    ViewData["Title"] = "EditSkills";
+}
+
+<h2>EditSkills</h2>
+
+
+<div class="col-md-4">
+    <form asp-action="AddSkill">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <label class="control-label">The skill</label>
+        <input type="text" name="skillName" class="form-control" />
+        <input type="submit" value="Add" class="btn btn-default" />
+    </form>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SkillName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkillName)
+                </td>
+                <td>
+                    <a asp-action="RemoveSkill" asp-route-id="@item.Id">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back</a> |
+</div>

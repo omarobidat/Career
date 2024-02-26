@@ -1,0 +1,41 @@
+﻿@using Career.Data
+@{
+    ViewData["Title"] = "SelectType";
+}
+
+<h2>SelectType</h2>
+
+<h4>UserType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <form asp-action="SelectType">
+                            <div class="form-group">
+                                <input type="hidden" value="@UserType.Student" name="userType" />
+                                <input type="submit" value="Student" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="SelectType">
+                            <div class="form-group">
+                                <input type="hidden" value="@UserType.Employer" name="userType" />
+                                <input type="submit" value="Employer" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

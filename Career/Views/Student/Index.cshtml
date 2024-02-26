@@ -1,0 +1,160 @@
+﻿@model Career.Models.StudentProfileViewModel
+
+@{
+    ViewData["Title"] = "Student Profile";
+}
+
+<h2>Student Profile</h2>
+
+<div>
+    <h4>Welcome! @Html.DisplayFor(model => model.Student.FirstName) @Html.DisplayFor(model => model.Student.LastName)</h4>
+    <a asp-action="Edit">Edit your information</a>
+    <hr />
+
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.User.UserName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.User.UserName)
+                            <br /><br />
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.Image)
+                        </dt>
+                        <dd>
+                            @{ string imagePath = Url.Content("~/ProfilePictures/Students/" + Model.Student.Image); }
+                            <div style="background-image: url(@imagePath);
+                                                      width: 200px;
+                                                      height: 200px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            <br />
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.CV)
+                        </dt>
+                        <dd>
+                            @using (Html.BeginForm("DownloadCV", "Student", new { filename = Model.Student.CV }))
+                            {
+                                <input type="submit" value="Download the CV" class="btn btn-default" />
+                            }
+                            <br /><br />
+                        </dd>
+
+                    </dl>
+                </td>
+                <td width="20px"></td>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.FirstName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.FirstName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.LastName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.LastName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.User.Email)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.User.Email)
+                            <br /><br />
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.Age)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.Age)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.Major)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.Major)
+                            <br /><br />
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.City)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.City)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.Country)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Student.Country)
+                            <br /><br />
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Student.Skills)
+                        </dt>
+                        <dd>
+                            @if (Model.Student.Skills != null)
+                            {
+                                @foreach (var sk in Model.Student.Skills)
+                                {
+                                    @Html.Raw($"{@sk.SkillName}, ");
+                                }
+                            }
+                            <a asp-action="EditSkills">Edit Skills</a>
+                        </dd>
+                    </dl>
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                    <label class="control-label">Discussions</label>
+                    <div style="border:thin;border-width:thin;height:350px;width:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden">
+                        @foreach (var dis in Model.Discussions)
+                        {
+                            <partial name="_MessageView" model="dis"/>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table width="1000" align="center">
+        <tbody>
+            <tr>
+                <td width="1*"></td>
+                <td width="500px">
+                    <label class="control-label">@ViewBag.SearchResault</label>
+                    @if (Model.Student.User.IsVerified || true)
+                    {
+                        <div style="align-content:center">
+                            <form asp-action="Match" method="post">
+                                <label class="control-label">Search for a job!</label><br />
+                                <input type="submit" value="Match" title="Search for jobs that your details satisfy!" class="btn btn-default" />
+                            </form>
+                        </div>
+                    }
+                    else if (Model.Student.User.IsRejected)
+                    {
+                        <label class="control-label">Your account has been rejected, Rejection Reason:<br /></label><br />
+                        @Html.DisplayFor(model => model.Student.User.RejectionReason)
+                    }
+                    else
+                    {
+                        <label class="control-label">Waiting for admin approval, you can search for jobs after the approval</label><br />
+                    }
+                </td>
+                <td width="1*"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+
+</div>

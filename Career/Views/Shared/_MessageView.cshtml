@@ -1,0 +1,139 @@
+﻿@model Career.Data.Discussion
+
+<div style="width:400px;margin:0 auto;">
+
+    @using (Html.BeginForm("Conversation", "Student"))
+    {
+        <input asp-for="MessageID" type="hidden" />
+
+        if (Model.From.Student == null)
+        {
+            <button type="submit" class="btn btn-default" style="width:400px">
+                <table>
+                    <tbody>
+                        <tr style="max-width:600px">
+                            <td style="border-bottom:solid;border-bottom-width:thin">
+                                <p>
+                                    From: @Model.From.Employer.EmployerName
+                                </p>
+                            </td>
+                            <td></td>
+                            <td style="border-bottom:solid;border-bottom-width:thin">
+                                <p>
+                                    To: @Model.To.Student.FirstName @Model.To.Student.LastName
+                                </p>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @{ string fromImagePath = Url.Content("~/ProfilePictures/Employers/" + Model.From.Employer.Image); }
+                                <div style="background-image: url(@fromImagePath);
+                                                      width: 50px;
+                                                      height: 50px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            </td>
+                            <td></td>
+                            <td>
+                                @{ string toImagePath = Url.Content("~/ProfilePictures/Students/" + Model.To.Student.Image); }
+                                <div style="background-image: url(@toImagePath);
+                                                      width: 50px;
+                                                      height: 50px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="width:200px;text-overflow: ellipsis;">
+                                    Message: @Html.Raw(Model.Message.Count()>20? $"{Model.Message}..." : Model.Message)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    Sent: @Model.SendingDate
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-default" style="width:400px">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="border-bottom:solid;border-bottom-width:thin">
+                                <p>
+                                    From: @Model.From.Student.FirstName @Model.From.Student.LastName
+                                </p>
+                            </td>
+                            <td></td>
+                            <td style="border-bottom:solid;border-bottom-width:thin">
+                                <p>
+                                    To: @Model.To.Employer.EmployerName
+                                </p>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @{ string fromImagePath = Url.Content("~/ProfilePictures/Students/" + Model.From.Student.Image); }
+                                <div style="background-image: url(@fromImagePath);
+                                                      width: 50px;
+                                                      height: 50px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            </td>
+                            <td></td>
+                            <td>
+                                @{ string toImagePath = Url.Content("~/ProfilePictures/Employers/" + Model.To.Employer.Image); }
+                                <div style="background-image: url(@toImagePath);
+                                                      width: 50px;
+                                                      height: 50px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="width:200px;text-overflow: ellipsis;">
+                                    Message: @Html.Raw(Model.Message.Count() > 20 ? $"{Model.Message.Substring(0,20)}..." : Model.Message)
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    Sent: @Model.SendingDate
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </button>
+
+        }
+
+
+    }
+
+
+</div>
+
+

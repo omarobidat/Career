@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Career.Data.Discussion>
+
+@{
+    if (Model.First().From.Employer == null)
+    {
+        ViewData["Title"] = $"Conversation with {Model.First().To.Employer.EmployerName}";
+        ViewBag.EmployerId = Model.First().To.Employer.EmployerID;
+    }
+    else
+    {
+        ViewData["Title"] = $"Conversation with {Model.First().From.Employer.EmployerName}";
+        ViewBag.EmployerId = Model.First().From.Employer.EmployerID;
+    }
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div style="width:400px;margin:0 auto;">
+    Send Message
+    @using (Html.BeginForm("SendMessage", "Student", FormMethod.Post, new { employerId = ViewBag.EmployerId }))
+    {
+        <input type="hidden" name="employerId" value="@ViewBag.EmployerId" />
+        <textarea rows="5" cols="50" name="description"></textarea><br />
+
+        <input type="submit" value="Send" />
+    }
+    History:
+</div>
+
+<div style="border:thin;border-width:thin;margin:0 auto;height:800px;width:400px;overflow:scroll;overflow-y:scroll;overflow-x:hidden">
+    @foreach (var item in Model)
+    {
+        <partial name="_MessageThreadView" model="item" />
+    }
+
+</div>
+
+

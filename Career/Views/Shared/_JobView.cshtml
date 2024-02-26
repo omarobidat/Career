@@ -1,0 +1,57 @@
+﻿@model Career.Data.Job
+
+<div style="width:400px;margin:0 auto;">
+    @using (Html.BeginForm("EmployerProfile", "Student"))
+    {<input type="hidden" name="employerId" value="@Model.JobOwner.EmployerID" />
+        <button type="submit" class="btn btn-default">
+            <table>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td style="border-bottom:solid;border-bottom-width:thin">
+                            <p>
+                                @Html.DisplayFor(model => model.JobName)
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @{ string imagePath = Url.Content("~/ProfilePictures/Employers/" + Model.JobOwner.Image); }
+                            <div style="background-image: url(@imagePath);
+                                                      width: 50px;
+                                                      height: 50px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                        </td>
+                        <td>
+                            <p style="margin:5px;padding:5px;">
+                                @Model.JobOwner.EmployerName <br />
+                                @Model.JobOwner.Address
+                            </p>
+                        </td>
+                        <td>
+                            <p style="margin:5px;padding:5px;">
+                                Required Age:
+                                From: @Model.MinAge To: @Model.MaxAge <br />
+                                Required Skills:
+                                @if (Model.Skills != null)
+                                {
+                                    @foreach (var sk in Model.Skills)
+                                    {
+                                        @Html.Raw($"{@sk.SkillName}, ");
+                                    }
+                                }
+
+                            </p>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </button>
+    }
+
+    
+</div>
+
+

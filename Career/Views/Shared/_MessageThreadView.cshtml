@@ -1,0 +1,101 @@
+﻿@model Career.Data.Discussion
+
+<div style="width:400px;margin:0 auto;">
+
+        @if (Model.From.Student == null)
+        {
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="border-bottom:solid;border-bottom-width:thin">
+                                <p>
+                                    From: @Model.From.Employer.EmployerName
+                                </p>
+                            </td>
+                            <td></td>
+
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @{ string fromImagePath = Url.Content("~/ProfilePictures/Employers/" + Model.From.Employer.Image); }
+                                <div style="background-image: url(@fromImagePath);
+                                                      width: 50px;
+                                                      height: 50px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>
+                                    Message: @Model.Message
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    Sent: @Model.SendingDate
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        }
+        else
+        {
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="border-bottom:solid;border-bottom-width:thin">
+                                <p>
+                                    From: @Model.From.Student.FirstName @Model.From.Student.LastName
+                                </p>
+                            </td>
+                            <td></td>
+
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @{ string fromImagePath = Url.Content("~/ProfilePictures/Students/" + Model.From.Student.Image); }
+                                <div style="background-image: url(@fromImagePath);
+                                                      width: 50px;
+                                                      height: 50px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>
+                                    Message: @Model.Message
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    Sent: @Model.SendingDate
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+        }
+
+</div>
+
+

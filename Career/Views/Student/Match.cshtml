@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Career.Data.Job>
+
+@{
+    ViewData["Title"] = "Matched jobs";
+}
+
+<h2>Search result</h2>
+
+<p>
+
+</p>
+@foreach (var job in Model)
+{
+    <partial name="_JobView" model="job"/>
+}
+
+    <div>
+        <a asp-action="Index">Back</a>
+    </div>

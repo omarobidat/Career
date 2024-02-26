@@ -1,0 +1,83 @@
+﻿@model Career.Data.Employer
+
+@{
+    ViewData["Title"] = $"{@Model.EmployerName} Profile";
+}
+
+<h2>@Model.EmployerName</h2>
+
+<div>
+    <h4>Employer</h4>
+    <hr />
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EmployerName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.EmployerName)
+                            <br /><br />
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Image)
+                        </dt>
+                        <dd>
+                            @{ string imagePath = Url.Content("~/ProfilePictures/Employers/" + Model.Image); }
+                            <div style="background-image: url(@imagePath);
+                                                      width: 200px;
+                                                      height: 200px;
+                                                      background-position: center;
+                                                      background-size: cover;"></div>
+                            <br />
+                        </dd>
+                    </dl>
+
+                </td>
+                <td></td>
+                <td>
+                    <dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Describtion)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Describtion)
+                            <br /><br />
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Address)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Address)
+                            <br /><br />
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.MobileNumber)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.MobileNumber)
+                            <br /><br />
+                        </dd>
+                    </dl>
+                </td>
+                <td>
+                    <div>
+                        Send Message
+                        @using (Html.BeginForm("SendMessage", "Student",FormMethod.Post,new { employerId=Model.EmployerID }))
+                        {
+                            <input type="hidden" name="employerId" value="@Model.EmployerID" />
+                            <textarea rows="5" cols="50" name="description"></textarea><br />
+
+                            <input type="submit" value="Send" />
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

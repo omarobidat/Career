@@ -1,0 +1,74 @@
+﻿@model Career.Data.Student
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h2>Add</h2>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4" style="width:auto">
+        <form asp-action="Add" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="User.Id" />
+            <table>
+                <tbody>
+                    <tr>
+                        <td width="45%">
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="control-label"></label>
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LastName" class="control-label"></label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Age" class="control-label"></label>
+                                <input asp-for="Age" class="form-control" />
+                                <span asp-validation-for="Age" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Major" class="control-label"></label>
+                                <input asp-for="Major" class="form-control" />
+                                <span asp-validation-for="Major" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="City" class="control-label"></label>
+                                <input asp-for="City" class="form-control" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Country" class="control-label"></label>
+                                <input asp-for="Country" class="form-control" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </td>
+                        <td width="10%"></td>
+                        <td width="45%">
+                            <div class="form-group">
+                                <label asp-for="CV" class="control-label">Resume </label>
+                                <input type="file" name="Resume" class="form-control" />
+                                File size must be less than 2MB and the supported types are; PDF and Word
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Image" class="control-label"></label>
+                                <input type="file" name="profilePicture" class="form-control" />
+                                File size must be less than 2MB and the supported types are; PNG, JPG and JPEG
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
